@@ -26,3 +26,9 @@ interface EmojiApiService {
     @GET("smileys_emotion")
     suspend fun getSmileysEmotion(): List<Emoji>
 }
+
+object EmojiApi{
+    val retrofitServiceApi : EmojiApiService by lazy {
+        retrofit.create(EmojiApiService::class.java)
+    }
+}
