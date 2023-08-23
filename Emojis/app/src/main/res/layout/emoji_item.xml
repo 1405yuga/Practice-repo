@@ -18,7 +18,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:adjustViewBounds="true"
-            android:scaleType="fitCenter"
+            android:scaleType="centerCrop"
             app:layout_constraintBottom_toTopOf="@id/emoji_name"/>
         <TextView
             android:id="@+id/emoji_name"
