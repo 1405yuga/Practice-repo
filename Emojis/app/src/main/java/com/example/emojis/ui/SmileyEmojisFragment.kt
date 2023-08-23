@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.emojis.adapter.EmojiAdapter
 import com.example.emojis.databinding.FragmentSmileyEmojisBinding
 
 private const val TAG = "SmileyEmojisFragment tag"
@@ -16,6 +17,7 @@ class SmileyEmojisFragment : Fragment() {
 
     private lateinit var binding: FragmentSmileyEmojisBinding
     private lateinit var viewModel: EmojisViewModel
+    private lateinit var emojiAdapter: EmojiAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,13 +26,15 @@ class SmileyEmojisFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentSmileyEmojisBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(requireActivity()).get(EmojisViewModel::class.java)
+        emojiAdapter = EmojiAdapter()
+
         viewModel.getSmileyEmojisList()
 
         viewModel.smileyEmojisList.observe(viewLifecycleOwner, Observer {
-            for (emoji in it) {
-                Log.d(TAG, "EMOJI : $emoji")
-            }
+            emojiAdapter.submitList(it)
         })
+
+        binding.resultRecyclerView.adapter = emojiAdapter
         return binding.root
     }
 
