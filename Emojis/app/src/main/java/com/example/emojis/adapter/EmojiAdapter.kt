@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import com.example.emojis.R
 import com.example.emojis.databinding.EmojiItemBinding
 import com.example.emojis.network.Emoji
 
@@ -26,6 +28,10 @@ class EmojiAdapter() : ListAdapter<Emoji, EmojiAdapter.EmojiViewHolder>(DiffCall
     class EmojiViewHolder(private val binding: EmojiItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(emoji: Emoji){
             binding.emojiName.text = emoji.name
+            binding.emojiImage.load(emoji.image){
+                placeholder(R.drawable.loading_animation)
+                error(R.drawable.baseline_error_outline_24)
+            }
         }
     }
 
