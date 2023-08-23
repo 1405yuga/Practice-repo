@@ -1,6 +1,7 @@
 package com.example.emojis.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.emojis.R
 import com.example.emojis.databinding.FragmentSmileyEmojisBinding
 
-
+private const val TAG ="SmileyEmojisFragment tag"
 class SmileyEmojisFragment : Fragment() {
 
     private lateinit var binding: FragmentSmileyEmojisBinding
@@ -29,6 +30,9 @@ class SmileyEmojisFragment : Fragment() {
         }
         viewModel.smileyEmojisList.observe(viewLifecycleOwner, Observer {
             binding.result.text = it.size.toString()
+            for(emoji in it){
+                Log.d(TAG,"EMOJI : $emoji")
+            }
         })
         return binding.root
     }

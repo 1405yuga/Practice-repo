@@ -22,7 +22,6 @@ class EmojisViewModel : ViewModel(){
                 _smileyEmojisList.value = EmojiApi.retrofitServiceApi.getSmileysEmotion()
                 Log.d(TAG,"List received : ${smileyEmojisList.value?.size}")
             }catch (e:Exception){
-                _smileyEmojisList.value = null
                 Log.d(TAG,"ERROR FOUND : ${e.message}")
             }
 
