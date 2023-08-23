@@ -6,7 +6,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 
-private const val BASE_URL = "https://api.api-ninjas.com/v1/emoji?group="
+private const val BASE_URL = "https://api.api-ninjas.com/v1/"
 
 val interceptor = Interceptor { chain ->
     val request = chain.request().newBuilder()
@@ -23,7 +23,7 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface EmojiApiService {
-    @GET("smileys_emotion")
+    @GET("emoji?group=smileys_emotion")
     suspend fun getSmileysEmotion(): List<Emoji>
 }
 
