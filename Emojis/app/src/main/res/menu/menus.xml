@@ -9,6 +9,18 @@
         <item android:id="@+id/people_body"
             android:title="@string/people_body"
             app:showAsAction="collapseActionView"/>
+        <item android:id="@+id/components"
+            android:title="@string/components"
+            app:showAsAction="collapseActionView"/>
+        <item android:id="@+id/animal_nature"
+            android:title="@string/animal_nature"
+            app:showAsAction="collapseActionView"/>
+        <item android:id="@+id/food_driks"
+            android:title="@string/food_drinks"
+            app:showAsAction="collapseActionView"/>
+        <item android:id="@+id/travel_places"
+            android:title="@string/travel_places"
+            app:showAsAction="collapseActionView"/>
     </group>
 
 </menu>

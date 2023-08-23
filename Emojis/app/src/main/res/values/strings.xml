@@ -4,4 +4,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="smiley_emotions">Smiley Emotions</string>
     <string name="people_body">People body</string>
+    <string name="components">Components</string>
+    <string name="animal_nature">Animal Nature</string>
+    <string name="food_drinks">Food Drinks</string>
+    <string name="travel_places">Travel Places</string>
 </resources>

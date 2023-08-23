@@ -40,19 +40,33 @@ class SmileyEmojisFragment : Fragment() {
             menuItem.isChecked = true
             when (menuItem.itemId) {
                 R.id.smiley_emotions -> {
-                    viewModel.getSmileyEmojisList(EmojiGroupNames.SMILEYS_EMOJIS)
-                    true
+                    setEmojiGroupName(EmojiGroupNames.SMILEYS_EMOJIS)
                 }
-
                 R.id.people_body -> {
-                    viewModel.getSmileyEmojisList(EmojiGroupNames.PEOPLE_BODY)
-                    true
+                    setEmojiGroupName(EmojiGroupNames.PEOPLE_BODY)
+                }
+                R.id.food_driks -> {
+                    setEmojiGroupName(EmojiGroupNames.FOOD_DRINK)
+                }
+                R.id.components -> {
+                    setEmojiGroupName(EmojiGroupNames.COMPONENT)
+                }
+                R.id.travel_places -> {
+                    setEmojiGroupName(EmojiGroupNames.TRAVEL_PLACES)
+                }
+                R.id.animal_nature -> {
+                    setEmojiGroupName(EmojiGroupNames.ANIMALS_NATURE)
                 }
                 else -> false
             }
 
         }
         return binding.root
+    }
+
+    private fun setEmojiGroupName(smileysEmojis: String) : Boolean{
+        viewModel.getSmileyEmojisList(smileysEmojis)
+        return true
     }
 
 }
