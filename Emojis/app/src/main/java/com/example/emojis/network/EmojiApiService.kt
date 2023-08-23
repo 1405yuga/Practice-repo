@@ -4,6 +4,7 @@ import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.GET
 
 private const val BASE_URL = "https://api.api-ninjas.com/v1/emoji?group="
 
@@ -22,4 +23,6 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface EmojiApiService {
+    @GET("smileys_emotion")
+    suspend fun getSmileysEmotion(): List<Emoji>
 }
