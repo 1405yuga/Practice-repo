@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import coil.load
+import com.example.serieslist.R
 import com.example.serieslist.databinding.CharacterItemBinding
 import com.example.serieslist.model.Result
 
@@ -29,7 +30,10 @@ class SeriesPagingAdapter : PagingDataAdapter<Result,SeriesPagingAdapter.SeriesP
                 name.text = result?.name ?: "Not found"
                 gender.text = result?.gender ?: "Not found"
                 if (result != null) {
-                    image.load(result.url)
+                    image.load(result.image){
+                        placeholder(R.drawable.loading_animation)
+                    }
+
                 }
             }
         }
