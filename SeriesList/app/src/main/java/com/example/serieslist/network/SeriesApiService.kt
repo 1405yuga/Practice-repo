@@ -21,3 +21,9 @@ interface SeriesApiService {
     suspend fun getCharacters(@Query("page") pageNo: Int): SeriesResult
 
 }
+
+object SeriesApi{
+    val retrofitApiService : SeriesApiService by lazy {
+        retrofitBuilder.create(SeriesApiService::class.java)
+    }
+}
