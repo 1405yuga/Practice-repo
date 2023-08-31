@@ -49,4 +49,9 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
     // Coil - to load images
     implementation ("io.coil-kt:coil:1.1.1")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0")
+
+    val paging_version = "3.1.1"
+    implementation("androidx.paging:paging-runtime:$paging_version")
 }
