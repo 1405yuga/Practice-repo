@@ -8,7 +8,13 @@ import com.example.serieslist.network.SeriesApiService
 class SeriesPagingSource(val seriesApi: SeriesApiService) : PagingSource<Int, Result>() {
 
     override fun getRefreshKey(state: PagingState<Int, Result>): Int? {
-
+        //according to anchorPosition(recently accessed index) closest page is found
+        return state.anchorPosition?.let { anchorPosition ->
+            //get closest page from anchor pos
+            val anchorPage = state.closestPageToPosition(anchorPosition)
+            //if anchor page doesnt have has prevkey / nextkey return  null
+            anchorPage?.prevKey?.plus(1) ?: anchorPage?.nextKey?.minus(1)
+        }
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Result> {
