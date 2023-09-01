@@ -7,8 +7,20 @@ import com.example.brewview.network.BeersApiService
 
 class BeersPagingSource(val beersApiService: BeersApiService) :
     PagingSource<Int, BeersResultItem>() {
+
     override fun getRefreshKey(state: PagingState<Int, BeersResultItem>): Int? {
-        TODO("Not yet implemented")
+        val anchorPosition  = state.anchorPosition
+        if(anchorPosition!=null){
+            val anchorPage = state.closestPageToPosition(anchorPosition)
+            if(anchorPage?.prevKey != null){
+                return anchorPage.prevKey?.plus(1)
+            }
+            else if(anchorPage?.nextKey != null){
+                return anchorPage.nextKey?.minus(1)
+            }
+        }
+        return null
+
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, BeersResultItem> {
