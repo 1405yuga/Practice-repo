@@ -4,4 +4,5 @@ data class BeersResultItem(
     val id: Int,
     val image_url: String,
     val name: String,
+    val description : String
 )
