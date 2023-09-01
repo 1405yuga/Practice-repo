@@ -1,5 +1,7 @@
 package com.example.brewview.paging
 
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -31,5 +33,15 @@ class BeersPagingAdapter : PagingDataAdapter<BeersResultItem,BeersPagingAdapter.
                 image.load(beer.image_url)
             }
         }
+    }
+
+    override fun onBindViewHolder(holder: BeerViewHolder, position: Int) {
+        if(getItem(position)!=null){
+            holder.bind(getItem(position)!!)
+        }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BeerViewHolder {
+        return BeerViewHolder(LayoutItemBeerBinding.inflate(LayoutInflater.from(parent.context),parent,false))
     }
 }
