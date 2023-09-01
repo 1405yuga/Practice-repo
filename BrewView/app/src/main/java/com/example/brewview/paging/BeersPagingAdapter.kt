@@ -6,6 +6,7 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.example.brewview.R
 import com.example.brewview.databinding.LayoutItemBeerBinding
 import com.example.brewview.model.BeersResult
 import com.example.brewview.model.BeersResultItem
@@ -30,7 +31,9 @@ class BeersPagingAdapter : PagingDataAdapter<BeersResultItem,BeersPagingAdapter.
             binding.apply {
                 name.text = beer.name
                 description.text = beer.description
-                image.load(beer.image_url)
+                image.load(beer.image_url){
+                    placeholder(R.drawable.loading_animation)
+                }
             }
         }
     }
