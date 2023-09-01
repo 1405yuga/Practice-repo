@@ -24,3 +24,9 @@ interface BeersApiService {
     ): BeersResult
 
 }
+
+object BeersApi{
+    val retrofitApiService : BeersApiService by lazy {
+        retrofitBuilder.create(BeersApiService::class.java)
+    }
+}
