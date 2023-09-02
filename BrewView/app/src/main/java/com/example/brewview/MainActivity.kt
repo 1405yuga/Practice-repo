@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.brewview.databinding.ActivityMainBinding
 import com.example.brewview.paging.BeersPagingAdapter
+import com.example.brewview.paging.ProjectConstants
 import com.example.brewview.viewmodel.BeerViewModel
 
 private const val TAG = "MainActivity tag"
@@ -28,9 +29,24 @@ class MainActivity : AppCompatActivity() {
         beerAdapter = BeersPagingAdapter()
         viewModel = ViewModelProvider(this).get(BeerViewModel::class.java)
 
+        val gridLayoutManager = GridLayoutManager(this@MainActivity,2)
+
+        // to convert every 5th element for full width
+        gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup(){
+            override fun getSpanSize(position: Int): Int {
+                return if ((position+1)% ProjectConstants.FULL_WIDTH_POSITION == 0) {
+                    2 // span 2 coloumns
+                } else {
+                    Log.d(TAG,"1 $position")
+                    1 // default span 1
+                }
+            }
+
+        }
+
         binding.recyclerView.apply {
             setHasFixedSize(true)
-            layoutManager = GridLayoutManager(this@MainActivity,2)
+            layoutManager = gridLayoutManager
             adapter = beerAdapter
         }
 
