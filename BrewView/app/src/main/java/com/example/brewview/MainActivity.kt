@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.recyclerView.apply {
             setHasFixedSize(true)
-            layoutManager = StaggeredGridLayoutManager(2,LinearLayoutManager.VERTICAL)
+            layoutManager = GridLayoutManager(this@MainActivity,2)
             adapter = beerAdapter
         }
 
