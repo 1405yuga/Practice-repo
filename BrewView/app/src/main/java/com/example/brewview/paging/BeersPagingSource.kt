@@ -2,6 +2,7 @@ package com.example.brewview.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.example.brewview.model.BeersResult
 import com.example.brewview.model.BeersResultItem
 import com.example.brewview.network.BeersApi
 
@@ -27,6 +28,10 @@ class BeersPagingSource :
             val position: Int = params.key ?: 1
             val response =
                 BeersApi.retrofitApiService.getBeersList(position, ProjectConstants.PER_PAGE)
+            val data : BeersResult = response
+            if(position % ProjectConstants.FULL_WIDTH_POSITION == 0){
+                // TODO: add ad item 
+            }
             return LoadResult.Page(
                 data = response,
                 prevKey = if (position == 1) null else position.minus(1),

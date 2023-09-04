@@ -58,4 +58,7 @@ dependencies {
 
     val paging_version = "3.2.0"
     implementation("androidx.paging:paging-runtime:$paging_version")
+
+    //for admob ads
+    implementation ("com.google.android.gms:play-services-ads:22.3.0")
 }
