@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">BrewView</string>
     <string name="ad_mob_id">ca-app-pub-3940256099942544/3419835294</string>
+    <string name="ads">Ads</string>
 </resources>
