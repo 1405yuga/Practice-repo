@@ -11,7 +11,6 @@ import com.example.brewview.databinding.ItemAdmobBinding
 import com.example.brewview.databinding.LayoutItemBeerBinding
 import com.example.brewview.model.AdMobItem
 import com.example.brewview.model.BeersResultItem
-import com.google.android.gms.ads.AdRequest
 
 class BeersPagingAdapter : PagingDataAdapter<Any, RecyclerView.ViewHolder>(DiffCallBack) {
     object DiffCallBack : DiffUtil.ItemCallback<Any>() {
@@ -40,11 +39,7 @@ class BeersPagingAdapter : PagingDataAdapter<Any, RecyclerView.ViewHolder>(DiffC
 
     class AdViewHolder(val binding: ItemAdmobBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(adItem: AdMobItem) {
-            val adRequest = AdRequest.Builder().build()
-            binding.adView.apply {
-                adUnitId = adItem.adUnitIdString
-                loadAd(adRequest)
-            }
+            binding.adView.text = "Ad ${adItem.adId}"
         }
     }
 
@@ -52,8 +47,7 @@ class BeersPagingAdapter : PagingDataAdapter<Any, RecyclerView.ViewHolder>(DiffC
         val item = getItem(position)
         return when (item) {
             is AdMobItem -> ProjectConstants.AD_VIEW_TYPE
-            is BeersResultItem -> ProjectConstants.BEER_VIEW_TYPE
-            else -> throw IllegalArgumentException("Incorrect item ")
+            else -> ProjectConstants.BEER_VIEW_TYPE
         }
     }
 
