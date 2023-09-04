@@ -1,15 +1,18 @@
 package com.example.brewview.paging
 
+import android.content.res.Resources
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.example.brewview.R
+import com.example.brewview.model.AdMobItem
 import com.example.brewview.model.BeersResult
 import com.example.brewview.model.BeersResultItem
 import com.example.brewview.network.BeersApi
 
 class BeersPagingSource :
-    PagingSource<Int, BeersResultItem>() {
+    PagingSource<Int, Any>() {
 
-    override fun getRefreshKey(state: PagingState<Int, BeersResultItem>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, Any>): Int? {
         val anchorPosition = state.anchorPosition
         if (anchorPosition != null) {
             val anchorPage = state.closestPageToPosition(anchorPosition)
@@ -23,17 +26,18 @@ class BeersPagingSource :
 
     }
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, BeersResultItem> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Any> {
         try {
             val position: Int = params.key ?: 1
             val response =
                 BeersApi.retrofitApiService.getBeersList(position, ProjectConstants.PER_PAGE)
-            val data : BeersResult = response
+            val data = mutableListOf<Any>()
+            data.addAll(response)
             if(position % ProjectConstants.FULL_WIDTH_POSITION == 0){
-                // TODO: add ad item 
+                data.add(AdMobItem(Resources.getSystem().getString(R.string.ad_mob_id)))
             }
             return LoadResult.Page(
-                data = response,
+                data = data,
                 prevKey = if (position == 1) null else position.minus(1),
                 nextKey = if (position == 325) null else position.plus(1)
             )
@@ -41,4 +45,5 @@ class BeersPagingSource :
             return LoadResult.Error(e)
         }
     }
+
 }
