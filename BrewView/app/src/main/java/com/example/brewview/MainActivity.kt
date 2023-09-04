@@ -34,11 +34,9 @@ class MainActivity : AppCompatActivity() {
         // to convert every 5th element for full width
         gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup(){
             override fun getSpanSize(position: Int): Int {
-                return if ((position+1)% ProjectConstants.FULL_WIDTH_POSITION == 0) {
-                    2 // span 2 coloumns
-                } else {
-                    Log.d(TAG,"1 $position")
-                    1 // default span 1
+                when(beerAdapter.getItemViewType(position)){
+                    ProjectConstants.AD_VIEW_TYPE -> return 2
+                    else -> return 1
                 }
             }
 
