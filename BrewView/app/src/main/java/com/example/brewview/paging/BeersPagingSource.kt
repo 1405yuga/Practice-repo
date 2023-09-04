@@ -1,13 +1,13 @@
 package com.example.brewview.paging
 
-import android.content.res.Resources
+import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.brewview.R
 import com.example.brewview.model.AdMobItem
-import com.example.brewview.model.BeersResult
-import com.example.brewview.model.BeersResultItem
 import com.example.brewview.network.BeersApi
+
+
+private const val TAG = "BeersPagingSource tag"
 
 class BeersPagingSource :
     PagingSource<Int, Any>() {
@@ -28,14 +28,28 @@ class BeersPagingSource :
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Any> {
         try {
+
             val position: Int = params.key ?: 1
-            val response =
+            Log.d(TAG, "current page : $position")
+            val responses =
                 BeersApi.retrofitApiService.getBeersList(position, ProjectConstants.PER_PAGE)
             val data = mutableListOf<Any>()
-            data.addAll(response)
+
+            for (index in responses.indices) {
+                if (index % ProjectConstants.FULL_WIDTH_POSITION == 0) {
+                    data.add(AdMobItem(position.toString()))
+                }
+                data.add(responses.get(index))
+            }
+
+            Log.d(TAG, "Response ${responses.size}")
+            /*
             if(position % ProjectConstants.FULL_WIDTH_POSITION == 0){
                 data.add(AdMobItem(Resources.getSystem().getString(R.string.ad_mob_id)))
             }
+
+             */
+            Log.d(TAG, "DATA ${data.size}")
             return LoadResult.Page(
                 data = data,
                 prevKey = if (position == 1) null else position.minus(1),
